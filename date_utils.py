@@ -2,6 +2,8 @@ from datetime import date
 import datetime
 import dateutil.parser
 import csv
+import pandas as pd
+
 
 # Define a function that converts a date to a string
 def date2str(date_obj):
@@ -32,4 +34,7 @@ def write_weights_file(year, file_name):
             day_writer.writerow([start.isoformat()] + ['NaN'])
             start += step
     
-    
+# Define a function to read weights file as a DataFrame
+def read_weights_file(file_name):
+    data_frame = pd.read_csv(file_name,header=None, names=['date','act_weight'],parse_dates=True)
+    return data_frame
