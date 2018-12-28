@@ -6,7 +6,7 @@ For now, there's no real weight tracking, just a set of date utilities to help m
 # Getting Started
 First get **python3** and **pip** setup.
 
-Then get the dependencies from the [requirements file](../requirements.txt) like so:
+Then get the dependencies from the [requirements file](requirements.txt) like so:
 ```
 > pip install -r requirements.txt
 ```
