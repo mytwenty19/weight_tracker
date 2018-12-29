@@ -14,7 +14,6 @@ def str2date(date_str):
     date_time = dateutil.parser.parse( date_str )
     return date_time.date()
 
-
 # Define a function that returns a string representing todays date
 def today2str():
     today = datetime.date.today()
