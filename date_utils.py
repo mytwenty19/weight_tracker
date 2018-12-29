@@ -36,5 +36,18 @@ def write_weights_file(year, file_name):
     
 # Define a function to read weights file as a DataFrame
 def read_weights_file(file_name):
-    data_frame = pd.read_csv(file_name,header=None, names=['date','act_weight'],parse_dates=True)
+    data_frame = pd.read_csv(file_name,header=None, names=['act_weight'],parse_dates=True)
     return data_frame
+
+# Select a part of the data frame
+def select_by_date(data_frame, from_date_str, to_date_str):
+    from_date = str2date(from_date_str)
+    to_date   = str2date(to_date_str)
+    step = datetime.timedelta(days=1)
+
+    date_list = []
+    while from_date <= to_date:
+        date_list.append(from_date)
+        from_date += step
+    
+    return data_frame.loc[date_list]
