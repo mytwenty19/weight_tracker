@@ -4,6 +4,7 @@ import dateutil.parser
 import csv
 import pandas as pd
 import calendar
+import matplotlib.pyplot as plt
 
 # Define a function that converts a date to a string
 def date2str(date_obj):
@@ -70,4 +71,28 @@ def write_goal_file(year, goal_weights, file_name):
 def read_goal_file(file_name):
     data_frame = pd.read_csv(file_name,header=None, names=['goal_weight'], parse_dates=True)
     return data_frame
+
+# Define function to generate plot for weights
+def save_progress_for_month(img_name, month_num):
+    act_wts  = read_weights_file('2019_weights.csv')
+    goal_wts = read_goal_file('2019_goal_weights.csv')
+
+    year = 2019
+    wts = act_wts.join(goal_wts)
+    rng = calendar.monthrange(year, month_num)
+
+    start = datetime.date(2019, month_num,1)
+    end   = datetime.date(2019, month_num, rng[1])
+    step  = datetime.timedelta(days=1)
+
+    date_list = []
+    while start <= end:
+        date_list.append(start)
+        start += step
+    
+    selected_wts = wts.loc[date_list]
+
+    selected_wts.plot()
+
+    plt.savefig(img_name)
 
