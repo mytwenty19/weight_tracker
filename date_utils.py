@@ -92,7 +92,11 @@ def save_progress_for_month(img_name, month_num):
     
     selected_wts = wts.loc[date_list]
 
-    selected_wts.plot()
+    ax = selected_wts.plot()
+    ax.set_title('Weight Progress Chart')
+    ax.set_xlabel('2019')
+    ax.set_ylabel('Weight (lbs)')
+    ax.set_ylim(150, 200)
 
     plt.savefig(img_name)
 
