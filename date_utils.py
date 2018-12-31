@@ -3,7 +3,7 @@ import datetime
 import dateutil.parser
 import csv
 import pandas as pd
-
+import calendar
 
 # Define a function that converts a date to a string
 def date2str(date_obj):
@@ -50,3 +50,24 @@ def select_by_date(data_frame, from_date_str, to_date_str):
         from_date += step
     
     return data_frame.loc[date_list]
+
+# Define a function to write monthly goal weights file
+def write_goal_file(year, goal_weights, file_name):
+
+    assert len(goal_weights)==12, "Expected goal_weights to have 12 elements."
+
+    with open(file_name, 'w') as csvfile:
+        goal_writer = csv.writer(csvfile)
+
+        for month in range(1,13):
+            month_range = calendar.monthrange(year, month)
+            goal_wt  = goal_weights[month-1]
+            for day in range(1,month_range[1]+1):
+                day_date = datetime.date(year, month, day)
+                goal_writer.writerow([day_date.isoformat(), goal_wt])
+
+# Define a function to read goal weights file as a DataFrame    
+def read_goal_file(file_name):
+    data_frame = pd.read_csv(file_name,header=None, names=['goal_weight'], parse_dates=True)
+    return data_frame
+
