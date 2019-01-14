@@ -73,7 +73,7 @@ def read_goal_file(file_name):
     return data_frame
 
 # Define function to generate plot for weights
-def save_progress_for_month(img_name, month_num):
+def save_weight_progress_for_month(img_name, month_num):
     act_wts  = read_weights_file('2019_weights.csv')
     goal_wts = read_goal_file('2019_goal_weights.csv')
 
@@ -100,3 +100,6 @@ def save_progress_for_month(img_name, month_num):
 
     plt.savefig(img_name)
 
+
+    data_frame = pd.read_excel(file_name, header=None, names=['act_reading'], index_col=0, parse_dates=True)
+    return data_frame
