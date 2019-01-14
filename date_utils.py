@@ -99,7 +99,3 @@ def save_weight_progress_for_month(img_name, month_num):
     ax.set_ylim(150, 200)
 
     plt.savefig(img_name)
-
-
-    data_frame = pd.read_excel(file_name, header=None, names=['act_reading'], index_col=0, parse_dates=True)
-    return data_frame
